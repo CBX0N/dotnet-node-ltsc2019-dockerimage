@@ -1,22 +1,16 @@
 ﻿$gitlocation = "C:\Users\boonc\Documents\GitHub\.NET-VS_BuildTools_Docker_Container"
 $localVSlayout = $gitlocation + "\localVSlayout\"
 set-location $gitlocation
+remove-item localVSlayout -Recurse
+Remove-Item c:\localVSlayout -Recurse
 mkdir localVSlayout  -ErrorAction SilentlyContinue
 mkdir c:\localVSlayout  -ErrorAction SilentlyContinue
 
 c:\users\boonc\vs_BuildTools.exe --layout c:\localVSlayout `
-    --add Microsoft.Component.ClickOnce.MSBuild  `
-    --add Microsoft.Net.Component.4.8.SDK  `
-    --add Microsoft.NetCore.Component.Runtime.3.1  `
-    --add Microsoft.NetCore.Component.Runtime.5.0  `
-    --add Microsoft.NetCore.Component.Runtime.6.0  `
-    --add Microsoft.NetCore.Component.SDK  `
-    --add Microsoft.VisualStudio.Component.NuGet.BuildTools  `
-    --add Microsoft.VisualStudio.Component.WebDeploy  `
-    --add Microsoft.VisualStudio.Web.BuildTools.ComponentGroup  `
-    --add Microsoft.VisualStudio.Workload.MSBuildTools `
-    --add Microsoft.VisualStudio.Workload.Node `
-    --lang en-US
+--add Microsoft.Component.MSBuild `
+--add Microsoft.VisualStudio.Workload.NodeBuildTools `
+--add Microsoft.VisualStudio.Workload.VCTools `
+--lang en-US
 
 write-host "VS Build tools Starting."
 Start-Sleep -Seconds 20

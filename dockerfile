@@ -18,19 +18,13 @@ RUN mkdir "%ProgramFiles%\NuGet\latest" `
 RUN mkdir c:\localVSlayout
 COPY localVSlayout c:\localVSlayout\
 
-RUN start /w c:\localVSlayout\vs_BuildTools.exe ^ `
- --add Microsoft.Component.ClickOnce.MSBuild ^ `
- --add Microsoft.Net.Component.4.8.SDK ^ `
- --add Microsoft.NetCore.Component.Runtime.3.1 ^ `
- --add Microsoft.NetCore.Component.Runtime.5.0 ^ `
- --add Microsoft.NetCore.Component.Runtime.6.0 ^ `
- --add Microsoft.NetCore.Component.SDK ^ `
- --add Microsoft.VisualStudio.Component.NuGet.BuildTools ^ `
- --add Microsoft.VisualStudio.Component.WebDeploy ^ `
- --add Microsoft.VisualStudio.Web.BuildTools.ComponentGroup ^ `
- --add Microsoft.VisualStudio.Workload.MSBuildTools ^ `
- --add Microsoft.VisualStudio.Workload.Node ^ `
- --quiet --norestart --wait
+RUN cmd /C c:\localVSlayout\vs_BuildTools.exe ^ `
+--add Microsoft.Component.MSBuild ^`
+--add Microsoft.VisualStudio.Workload.NodeBuildTools ^`
+--add Microsoft.VisualStudio.Workload.VCTools ^`
+--quiet --norestart --wait
+
+RUN rmdir c:\localVSlayout /Q /S
 
 #ENTRYPOINT [ "ping", "-t", "localhost"]
 ENTRYPOINT ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
