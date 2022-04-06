@@ -10,21 +10,24 @@ ENV `
     # Install location of Roslyn
     ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\Roslyn"
 
+# Create Install Files
+RUN mkdir c:\localVSlayout `
+  && mkdir "%ProgramFiles%\NuGet\latest" `
+  && mkdir c:\installfiles
+COPY localVSlayout c:\localVSlayout\
+COPY installFiles C:\installFiles
+
 # Install NuGet CLI
-RUN mkdir "%ProgramFiles%\NuGet\latest" `
-    && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe `
+RUN mv c:\installfiles\nuget.exe "%ProgramFiles%\NuGet\latest\nuget.exe `
     && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
 
-RUN mkdir c:\localVSlayout
-COPY localVSlayout c:\localVSlayout\
-
-RUN cmd /C c:\localVSlayout\vs_BuildTools.exe ^ `
+# Install VS_BuildTools + Cleanup Once Complete
+RUN `
+&& cmd /C c:\localVSlayout\vs_BuildTools.exe ^ `
 --add Microsoft.Component.MSBuild ^`
 --add Microsoft.VisualStudio.Workload.NodeBuildTools ^`
 --add Microsoft.VisualStudio.Workload.VCTools ^`
---quiet --norestart --wait
+--quiet --norestart --wait `
+&& rmdir c:\localVSlayout /Q /S
 
-RUN rmdir c:\localVSlayout /Q /S
-
-#ENTRYPOINT [ "ping", "-t", "localhost"]
 ENTRYPOINT ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
