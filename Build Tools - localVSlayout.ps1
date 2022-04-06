@@ -6,7 +6,7 @@ Remove-Item c:\localVSlayout -Recurse
 mkdir localVSlayout  -ErrorAction SilentlyContinue
 mkdir c:\localVSlayout  -ErrorAction SilentlyContinue
 
-c:\users\boonc\vs_BuildTools.exe --layout c:\localVSlayout `
+c:\temp\vs_BuildTools.exe --layout c:\localVSlayout `
 --add Microsoft.Component.MSBuild `
 --add Microsoft.VisualStudio.Workload.NodeBuildTools `
 --add Microsoft.VisualStudio.Workload.VCTools `
@@ -17,7 +17,7 @@ Start-Sleep -Seconds 20
 
 try{
     $proc = Get-Process -Name vs_layout -ErrorAction SilentlyContinue
-    while($proc -ne $null){
+    while($null -ne $proc){
         Start-Sleep -Seconds 10
         write-host "----- Checking Status -----"
         $proc = Get-Process -Name vs_layout

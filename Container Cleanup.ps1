@@ -1,5 +1,4 @@
 ﻿$containers = docker ps -a
-$containersnum = ($containers.count - 1)
 $num = 1
 while($num -lt $containers.Count){
 
