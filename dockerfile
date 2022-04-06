@@ -13,12 +13,12 @@ ENV `
 # Create Install Files
 RUN mkdir c:\localVSlayout `
   && mkdir "%ProgramFiles%\NuGet\latest" `
-  && mkdir c:\installfiles
+  && mkdir c:\installFiles
 COPY localVSlayout c:\localVSlayout\
 COPY installFiles C:\installFiles
 
 # Install NuGet CLI
-RUN mv c:\installfiles\nuget.exe "%ProgramFiles%\NuGet\latest\nuget.exe `
+RUN mv c:\installFiles\nuget.exe "%ProgramFiles%\NuGet\latest\nuget.exe `
     && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
 
 # Install VS_BuildTools + Cleanup Once Complete
