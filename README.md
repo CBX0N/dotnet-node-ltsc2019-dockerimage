@@ -23,3 +23,4 @@ NODEJS:
 
 Currently the VS_BuildTools install take a long time, This will look like it has frozen but it has not. 
 
+C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin>
