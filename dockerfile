@@ -22,11 +22,13 @@ RUN c:\setupfiles\localVSlayout\vs_BuildTools.exe ^`
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && rmdir c:\setupfiles\localVSlayout /Q /S
 
-RUN set PATH=%PATH%;c:\Program Files\NuGet\latest\ `
-    && set PATH=%PATH%;C:\Program Files\7-Zip\ `
-    && set PATH=%PATH%;c:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VisualStudio\NodeJs\ `
-    && set PATH=%PATH%;c:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\ 
+SHELL ["powershell", "-command"]
 
-#NPM install node-gyp
+RUN setx /M PATH $(${env:path} +\";${Env:programfiles(x86)}\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VisualStudio\NodeJs\")
+RUN setx /M PATH $(${env:path} +\";${Env:programfiles(x86)}\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\")
+RUN setx /M PATH $(${env:path} +\";${Env:programfiles}\7-Zip\")
+RUN setx /M PATH $(${env:path} +\";${Env:programfiles}\NuGet\latest\")
+
+RUN NPM install node-gyp
 
 ENTRYPOINT ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
