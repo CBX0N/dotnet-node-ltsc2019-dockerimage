@@ -14,7 +14,12 @@ Steps to run:
 3. Run 'docker build --pull --rm -f "dockerfile" -t dotnet4.8_vsbuild:latest "." -m 10g'
 
 Usefull paths for checking correctly built:
-NODEJS VS Workload: c:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VisualStudio\NodeJs
+
+NODEJS:
+ c:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VisualStudio\NodeJs
+ c:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VisualStudio\v17.0\Node.js Tools
+
+
 
 Currently the VS_BuildTools install take a long time, This will look like it has frozen but it has not. 
 
