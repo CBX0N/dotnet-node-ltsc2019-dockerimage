@@ -18,16 +18,16 @@ COPY localVSlayout c:\localVSlayout\
 COPY installFiles C:\installFiles
 
 # Install NuGet CLI
-RUN move c:\installFiles\nuget.exe "%ProgramFiles%\NuGet\latest\nuget.exe `
-    && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
+
+RUN powershell.exe -command "Move-Item c:\installFiles\nuget.exe $env:programfiles\NuGet\nuget.exe"
+RUN mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
 
 # Install VS_BuildTools + Cleanup Once Complete
-RUN `
-&& cmd /C c:\localVSlayout\vs_BuildTools.exe ^ `
---add Microsoft.Component.MSBuild ^`
---add Microsoft.VisualStudio.Workload.NodeBuildTools ^`
---add Microsoft.VisualStudio.Workload.VCTools ^`
---quiet --norestart --wait `
-&& rmdir c:\localVSlayout /Q /S
+RUN cmd /C c:\localVSlayout\vs_BuildTools.exe ^`
+ --add Microsoft.Component.MSBuild ^`
+ --add Microsoft.VisualStudio.Workload.NodeBuildTools ^`
+ --add Microsoft.VisualStudio.Workload.VCTools ^`
+ --quiet --norestart --wait ` 
+ && rmdir c:\localVSlayout /Q /S
 
 ENTRYPOINT ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
