@@ -18,7 +18,7 @@ COPY localVSlayout c:\localVSlayout\
 COPY installFiles C:\installFiles
 
 # Install NuGet CLI
-RUN mv c:\installFiles\nuget.exe "%ProgramFiles%\NuGet\latest\nuget.exe `
+RUN move c:\installFiles\nuget.exe "%ProgramFiles%\NuGet\latest\nuget.exe `
     && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
 
 # Install VS_BuildTools + Cleanup Once Complete
