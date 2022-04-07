@@ -11,6 +11,6 @@ cmd /c $gitlocation\vs_BuildTools.exe --layout $localVSlayout `
     --add Microsoft.Component.MSBuild `
     --add Microsoft.VisualStudio.Workload.NodeBuildTools `
     --add Microsoft.VisualStudio.Workload.VCTools `
-    --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64
+    --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 `
     --lang en-US
 Write-Host "++++ Done ++++"
