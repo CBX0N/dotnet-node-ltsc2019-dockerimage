@@ -18,6 +18,7 @@ RUN c:\setupfiles\localVSlayout\vs_BuildTools.exe ^`
     --add Microsoft.VisualStudio.Workload.NodeBuildTools ^`
     --add Microsoft.VisualStudio.Workload.VCTools ^`
     --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 ^`
+    --add Microsoft.VisualStudio.Component.Windows10SDK.19041 ^`
     --quiet --norestart --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && rmdir c:\setupfiles\localVSlayout /Q /S
@@ -28,7 +29,8 @@ RUN setx /M PATH $(${env:path} +\";${Env:programfiles(x86)}\Microsoft Visual Stu
 RUN setx /M PATH $(${env:path} +\";${Env:programfiles(x86)}\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\")
 RUN setx /M PATH $(${env:path} +\";${Env:programfiles}\7-Zip\")
 RUN setx /M PATH $(${env:path} +\";${Env:programfiles}\NuGet\latest\")
+RUN setx /M VCINSTALLDIR C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170
 
-RUN NPM install node-gyp
+#RUN NPM install node-gyp
 
 ENTRYPOINT ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
